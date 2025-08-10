@@ -3,199 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>واجهة إدخال البيانات</title>
+    <title>نموذج إدخال البيانات</title>
+    <!-- تضمين Tailwind CSS من CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* الخط الرئيسي للصفحة */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .container {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
-            direction: rtl; /* Set direction to right-to-left for Arabic */
-            text-align: right;
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 25px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: bold;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="number"], /* For years of service if applicable */
-        select,
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-sizing: border-box; /* Ensures padding doesn't affect total width */
-            font-size: 16px;
-        }
-        textarea {
-            resize: vertical; /* Allow vertical resizing */
-            min-height: 80px; /* Adjusted for less text */
-        }
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            width: 100%;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .message {
-            text-align: center;
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 5px;
-            display: none; /* Hidden by default */
-        }
-        .message.success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .message.error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* لون خلفية رمادي فاتح */
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h2>واجهة إدخال البيانات</h2>
-        <form id="dataForm">
-            <div class="form-group">
-                <label for="fullName">الاسم الثلاثي:</label>
-                <input type="text" id="fullName" name="fullName" required>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <!-- حاوية النموذج الرئيسية -->
+    <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-lg">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">نموذج بيانات الموظف</h2>
+        
+        <!--
+        هام:
+        يجب استبدال `[YOUR_DEPLOYED_SCRIPT_URL]` برابط الـ Script الخاص بك بعد نشره.
+        تأكد من أن طريقة النشر (Deployment) هي "Web app" وأن الوصول متاح "Anyone, even anonymous".
+        -->
+        <form action="https://script.google.com/macros/s/AKfycbzCf1Xm2tYf4mAHHbGhLOKDd5HzrNqFlyhW_64pIkJbGjGCHf2ride44dxz5C4BoB0R9g/exec" method="post" id="employeeForm" class="space-y-4">
+            
+            <!-- حقل: الاسم الثلاثي -->
+            <div class="space-y-2">
+                <label for="fullName" class="block text-sm font-medium text-gray-700">الاسم الثلاثي:</label>
+                <input type="text" id="fullName" name="fullName" required
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
             </div>
 
-            <div class="form-group">
-                <label for="gender">الجنس:</label>
-                <select id="gender" name="gender" required>
-                    <option value="">اختر الجنس</option>
+            <!-- حقل: العمر -->
+            <div class="space-y-2">
+                <label for="age" class="block text-sm font-medium text-gray-700">العمر:</label>
+                <input type="number" id="age" name="age" required
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+
+            <!-- حقل: الجنس -->
+            <div class="space-y-2">
+                <label for="gender" class="block text-sm font-medium text-gray-700">الجنس:</label>
+                <select id="gender" name="gender" required
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    <option value="" disabled selected>اختر الجنس</option>
                     <option value="ذكر">ذكر</option>
                     <option value="أنثى">أنثى</option>
                 </select>
             </div>
-
-            <div class="form-group">
-                <label for="email">البريد الإلكتروني:</label>
-                <input type="email" id="email" name="email" required>
+            
+            <!-- حقل: مكان الإقامة السابق -->
+            <div class="space-y-2">
+                <label for="previousResidence" class="block text-sm font-medium text-gray-700">مكان الإقامة السابق:</label>
+                <input type="text" id="previousResidence" name="previousResidence" required
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            
+            <!-- حقل: مكان الإقامة الحالي -->
+            <div class="space-y-2">
+                <label for="currentResidence" class="block text-sm font-medium text-gray-700">مكان الإقامة الحالي:</label>
+                <input type="text" id="currentResidence" name="currentResidence" required
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
             </div>
 
-            <div class="form-group">
-                <label for="phone">رقم الهاتف:</label>
-                <input type="tel" id="phone" name="phone" placeholder="مثال: +9627XXXXXXXX" pattern="[0-9]{10,15}" title="الرجاء إدخال رقم هاتف صالح (10-15 رقم)" required>
+            <!-- حقل: رقم الهاتف -->
+            <div class="space-y-2">
+                <label for="phone" class="block text-sm font-medium text-gray-700">رقم الهاتف:</label>
+                <input type="tel" id="phone" name="phone" required
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
             </div>
 
-            <div class="form-group">
-                <label for="nationality">الجنسية:</label>
-                <input type="text" id="nationality" name="nationality" required>
-            </div>
-
-            <div class="form-group">
-                <label for="residence">مكان الإقامة:</label>
-                <input type="text" id="residence" name="residence" required>
-            </div>
-
-            <div class="form-group">
-                <label for="educationLevel">المؤهل الدراسي:</label>
-                <select id="educationLevel" name="educationLevel" required>
-                    <option value="">اختر المؤهل</option>
-                    <option value="معهد متوسط">معهد متوسط</option>
-                    <option value="معهد عالي">معهد عالي</option>
-                    <option value="بكالوريا">بكالوريا</option>
-                    <option value="شهادة جامعية">شهادة جامعية</option>
-                    <option value="ماجستير">ماجستير</option>
+            <!-- حقل: المؤهل الدراسي -->
+            <div class="space-y-2">
+                <label for="educationLevel" class="block text-sm font-medium text-gray-700">المؤهل الدراسي:</label>
+                <select id="educationLevel" name="educationLevel" required
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    <option value="" disabled selected>اختر المؤهل الدراسي</option>
+                    <option value="أساسي">أساسي</option>
+                    <option value="ثانوي">ثانوي</option>
+                    <option value="معهد">معهد</option>
+                    <option value="إجازة">إجازة</option>
+                    <option value="دبلوم">دبلوم</option>
+                    <option value="ماستر">ماستر</option>
                     <option value="دكتوراة">دكتوراة</option>
-                    <option value="أخرى">أخرى</option>
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="yearsOfService">عدد سنوات الخدمة:</label>
-                <input type="number" id="yearsOfService" name="yearsOfService" min="0" step="1" required>
+            <!-- حقل: الاختصاص -->
+            <div class="space-y-2">
+                <label for="specialization" class="block text-sm font-medium text-gray-700">الاختصاص:</label>
+                <input type="text" id="specialization" name="specialization" required
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
             </div>
 
-            <button type="submit">إرسال البيانات</button>
-            <div id="responseMessage" class="message"></div>
+            <!-- حقل: سنة التعيين -->
+            <div class="space-y-2">
+                <label for="yearOfAppointment" class="block text-sm font-medium text-gray-700">سنة التعيين:</label>
+                <input type="number" id="yearOfAppointment" name="yearOfAppointment" required
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+
+            <!-- حقل: الوضع المهني الحالي -->
+            <div class="space-y-2">
+                <label for="currentProfessionalStatus" class="block text-sm font-medium text-gray-700">الوضع المهني الحالي:</label>
+                <select id="currentProfessionalStatus" name="currentProfessionalStatus" required
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    <option value="" disabled selected>اختر الوضع المهني</option>
+                    <option value="قائم على رأس العمل">قائم على رأس العمل</option>
+                    <option value="إجازة استيداع">إجازة استيداع</option>
+                    <option value="مستقيل">مستقيل</option>
+                    <option value="متقاعد">متقاعد</option>
+                    <option value="مفصول لأسباب ثورية">مفصول لأسباب ثورية</option>
+                </select>
+            </div>
+
+            <!-- حقل: هل قمت بتقديم الوثائق للعودة إلى العمل -->
+            <div class="space-y-2">
+                <label for="submittedDocuments" class="block text-sm font-medium text-gray-700">هل قمت بتقديم الوثائق للعودة إلى العمل:</label>
+                <select id="submittedDocuments" name="submittedDocuments" required
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    <option value="" disabled selected>اختر</option>
+                    <option value="نعم">نعم</option>
+                    <option value="لا">لا</option>
+                </select>
+            </div>
+
+            <!-- حقل: تاريخ التقديم (سيظهر فقط إذا كانت الإجابة "نعم") -->
+            <div id="submissionDateContainer" class="space-y-2 hidden">
+                <label for="submissionDate" class="block text-sm font-medium text-gray-700">تاريخ التقديم:</label>
+                <input type="date" id="submissionDate" name="submissionDate"
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+
+            <!-- حقل: ملاحظات -->
+            <div class="space-y-2">
+                <label for="notes" class="block text-sm font-medium text-gray-700">ملاحظات:</label>
+                <textarea id="notes" name="notes" rows="4"
+                          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+            </div>
+
+            <!-- زر الإرسال -->
+            <button type="submit"
+                    class="w-full mt-6 px-4 py-2 text-white font-bold bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                إرسال البيانات
+            </button>
         </form>
     </div>
 
     <script>
-        const form = document.getElementById('dataForm');
-        const responseMessage = document.getElementById('responseMessage');
+        document.addEventListener('DOMContentLoaded', function() {
+            const submittedDocumentsSelect = document.getElementById('submittedDocuments');
+            const submissionDateContainer = document.getElementById('submissionDateContainer');
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission
-
-            const formData = new FormData(form);
-            const data = {};
-            for (let [key, value] of formData.entries()) {
-                data[key] = value;
-            }
-
-            // IMPORTANT: Replace with your Web App URL from Google Apps Script deployment
-            const webAppUrl = 'https://script.google.com/macros/s/AKfycbzCf1Xm2tYf4mAHHbGhLOKDd5HzrNqFlyhW_64pIkJbGjGCHf2ride44dxz5C4BoB0R9g/exec'; // <--- PASTE YOUR URL HERE
-
-            fetch(webAppUrl, {
-                method: 'POST',
-                mode: 'no-cors', // Required for Google Apps Script as a simple POST
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams(data).toString()
-            })
-            .then(response => {
-                // Since 'no-cors' is used, we can't directly read the response.
-                // We assume success if the request completes without a network error.
-                displayMessage('تم إرسال البيانات بنجاح!', 'success');
-                form.reset(); // Clear the form
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                displayMessage('حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.', 'error');
+            submittedDocumentsSelect.addEventListener('change', function() {
+                if (this.value === 'نعم') {
+                    submissionDateContainer.classList.remove('hidden');
+                } else {
+                    submissionDateContainer.classList.add('hidden');
+                }
             });
         });
-
-        function displayMessage(msg, type) {
-            responseMessage.textContent = msg;
-            responseMessage.className = `message ${type}`;
-            responseMessage.style.display = 'block';
-            setTimeout(() => {
-                responseMessage.style.display = 'none';
-            }, 5000); // Hide message after 5 seconds
-        }
     </script>
 </body>
 </html>
